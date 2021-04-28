@@ -10,6 +10,7 @@ import { Lato_400Regular } from "@expo-google-fonts/lato";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
