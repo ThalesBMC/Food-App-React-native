@@ -1,5 +1,5 @@
 import React from "react";
-
+import { View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { Avatar, Button, Card, Paragraph } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
@@ -34,7 +34,10 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
     <RestaurantCard elevation={5}>
-      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+      <View style={{ padding: 16 }}>
+        <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+      </View>
+
       <Info>
         <Text variant="label">{name}</Text>
         <Section>
