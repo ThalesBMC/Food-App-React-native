@@ -11,8 +11,8 @@ export const RestaurantCard = styled(Card)`
 `;
 
 export const RestaurantCardCover = styled(Card.Cover)`
-  /*Ta quebrando a imagem no android estudio padding: ${(props) =>
-    props.theme.space[3]}; */
+  /*Ta quebrando a imagem no android estudio  */
+  padding: ${(props) => props.theme.space[3]};
   background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 export const Address = styled.Text`
