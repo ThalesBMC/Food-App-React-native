@@ -1,15 +1,12 @@
-import React from "react";
-import { StyleSheet, Text, View, StatusBar, FlatList } from "react-native";
-import { Searchbar } from "react-native-paper";
+import React, { useContext } from "react";
+import { FlatList, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Colors } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from "styled-components/native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
-
-const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
-
+import { RestaurantsContext } from "../../../services/restaurants/restaurant.context";
+import { Search } from "../components/search.component";
 //Usa isso porque o Flat list tem o atributo contentContainer para poder estilisar a list
 //ai uso o attts(attributes) para poder usar essa propriedade no syled components.
 const RestaurantList = styled(FlatList).attrs({
@@ -17,42 +14,45 @@ const RestaurantList = styled(FlatList).attrs({
     padding: 16,
   },
 })``;
+const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
+const LoadingContainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
 
-export const RestaurantsScreen = () => {
-  const [search, setSearch] = React.useState("");
-  const onChangeSearch = (query) => setSearch(query);
+export const RestaurantsScreen = ({ navigation }) => {
+  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+  if (error) {
+    console.log(error);
+  }
 
   return (
     <SafeArea>
-      <SearchContainer>
-        <Searchbar
-          placeholder="Search"
-          onChangeText={onChangeSearch}
-          value={search}
-        />
-      </SearchContainer>
+      {isLoading && (
+        <LoadingContainer>
+          <Loading size={50} animating={true} color={Colors.red300} />
+        </LoadingContainer>
+      )}
+      <Search />
+
       <RestaurantList
-        data={[
-          { name: 1 },
-          { name: 2 },
-          { name: 3 },
-          { name: 4 },
-          { name: 5 },
-          { name: 6 },
-          { name: 7 },
-          { name: 8 },
-          { name: 9 },
-          { name: 10 },
-          { name: 11 },
-          { name: 12 },
-          { name: 13 },
-          { name: 14 },
-        ]}
-        renderItem={() => (
-          <Spacer position="bottom" size="large">
-            <RestaurantInfoCard />
-          </Spacer>
-        )}
+        data={restaurants}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("RestaurantDetail")}
+              onLongPress={() => console.log(item.name)}
+              activeOpacity={0.6}
+            >
+              <Spacer position="bottom" size="large">
+                <RestaurantInfoCard restaurant={item} />
+              </Spacer>
+            </TouchableOpacity>
+          );
+        }}
         keyExtractor={(item) => item.name}
       />
     </SafeArea>
