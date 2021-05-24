@@ -18,6 +18,7 @@ export const Search = () => {
   useEffect(() => {
     setSearchKeyword(keyword);
   }, [keyword]);
+  // pq ai eu posso escolher o icon para as partes que precisam do icon no paper
   //https://oblador.github.io/react-native-vector-icons/ MAterialCommunityIcons é oq o paper aceita
   return (
     <SearchContainer>
