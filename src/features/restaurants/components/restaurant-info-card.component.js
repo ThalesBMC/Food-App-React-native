@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { Searchbar } from "react-native-paper";
-import { Avatar, Button, Card, Paragraph } from "react-native-paper";
+
 import { SvgXml } from "react-native-svg";
 
 import star from "../../../../assets/star";
