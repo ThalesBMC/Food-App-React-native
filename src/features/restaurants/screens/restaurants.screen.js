@@ -6,6 +6,8 @@ import styled from "styled-components/native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurant.context";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
+import { FavouritesBar } from "../../../components/favourites/favourite-bar.component";
 import { Search } from "../components/search.component";
 //Usa isso porque o Flat list tem o atributo contentContainer para poder estilisar a list
 //ai uso o attts(attributes) para poder usar essa propriedade no syled components.
@@ -25,6 +27,8 @@ const LoadingContainer = styled.View`
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+  const [isToggled, setIsToggled] = React.useState(false);
+  const { favourites } = useContext(FavouritesContext);
   if (error) {
     console.log(error);
   }
@@ -36,8 +40,16 @@ export const RestaurantsScreen = ({ navigation }) => {
           <Loading size={50} animating={true} color={Colors.red300} />
         </LoadingContainer>
       )}
-      <Search />
-
+      <Search
+        onFavouritesToggle={() => setIsToggled(!isToggled)}
+        isFavoriteToggled={isToggled}
+      />
+      {isToggled && (
+        <FavouritesBar
+          favourites={favourites}
+          onNavigate={navigation.navigate}
+        />
+      )}
       <RestaurantList
         data={restaurants}
         renderItem={({ item }) => {

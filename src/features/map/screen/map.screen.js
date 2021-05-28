@@ -53,7 +53,7 @@ export const MapScreen = ({ navigation }) => {
                   })
                 }
               >
-                <MapCallout restaurant={restaurant} />
+                <MapCallout restaurant={restaurant} isMap />
               </MapView.Callout>
             </MapView.Marker>
           );
