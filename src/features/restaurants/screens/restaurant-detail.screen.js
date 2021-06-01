@@ -18,11 +18,11 @@ export const RestaurantDetailScreen = ({ route, navigation }) => {
   const [drinksExpanded, setDrinksExpanded] = useState(false);
   return (
     <SafeArea>
-      <TouchableOpacity onPress={() => navigation.navigate("Restaurants")}>
+      {/* <TouchableOpacity onPress={() => navigation.navigate("Restaurants")}>
         <BackButton>
           <AntDesign name="back" size={28} color="black" />
         </BackButton>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <RestaurantInfoCard restaurant={restaurant} />
       <ScrollView>
         <List.Accordion

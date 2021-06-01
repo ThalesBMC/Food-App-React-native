@@ -3,19 +3,18 @@ import { FlatList, TouchableOpacity } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from "styled-components/native";
+import { FadeInView } from "../../../components/animations/fade.animation";
+
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurant.context";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { FavouritesBar } from "../../../components/favourites/favourite-bar.component";
 import { Search } from "../components/search.component";
+import { RestaurantList } from "../components/restaurant-list.styles";
 //Usa isso porque o Flat list tem o atributo contentContainer para poder estilisar a list
 //ai uso o attts(attributes) para poder usar essa propriedade no syled components.
-const RestaurantList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 16,
-  },
-})``;
+
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
 `;
@@ -64,7 +63,9 @@ export const RestaurantsScreen = ({ navigation }) => {
               activeOpacity={0.6}
             >
               <Spacer position="bottom" size="large">
-                <RestaurantInfoCard restaurant={item} />
+                <FadeInView>
+                  <RestaurantInfoCard restaurant={item} />
+                </FadeInView>
               </Spacer>
             </TouchableOpacity>
           );
